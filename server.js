@@ -18,6 +18,16 @@ app.get('/', (req,res) => {
     rollbar.info('html file served successfully.')
 })
 let fears = []
+try {
+    nonExistentFunction();
+  } catch (error) {
+    console.error(error);
+    rollbar.warning('Example of a warning alert')
+    rollbar.critical('RED ALERT: CRITICAL ALERT!');
+
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+  }
 
 app.post('/api/fear', (req, res)=>{
     let {name} = req.body
@@ -39,16 +49,6 @@ app.post('/api/fear', (req, res)=>{
     
 })
 
-try {
-    nonExistentFunction();
-  } catch (error) {
-    console.error(error);
-    rollbar.warning('Example of a warning alert')
-    rollbar.critical('RED ALERT: CRITICAL ALERT!');
-
-    // expected output: ReferenceError: nonExistentFunction is not defined
-    // Note - error messages will vary depending on browser
-  }
 
 const port = process.env.PORT || 4242
 
