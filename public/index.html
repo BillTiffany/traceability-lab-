@@ -9,5 +9,52 @@
 </head>
 <body>
     <h1>Tuesdays lab</h1>
+    <form>
+    <button class ="scary">Add Your Fear</button>
+    <input type="text" placeholder="Enter your biggest fear"></input>
+    </form>
+    <section></section>
+    <script>
+function submitHandler(e){
+            e.preventDefault()
+            axios.post('/api/fear', {name: fear.value, })
+                .then(res => {
+                    container.innerHTML = ''
+                    fear.value = ''
+
+                    res.data.forEach(Fear => {
+                        container.innerHTML += `<p>${Fear}</p>`
+                    })
+                })
+                .catch(err => {
+                    fear.value = ''
+
+                    const notif = document.createElement('aside')
+                    notif.innerHTML = `<p>${err.response.data}</p>
+                    <button class='close'>close</button>`
+                    document.body.appendChild(notif)
+
+                    document.querySelectorAll('.close').forEach(btn => {
+                        btn.addEventListener('click', (e)=>{
+                            e.target.parentNode.remove()
+                        })
+                    })
+                })
+        }
+
+        addForm.addEventListener('submit', submitHandler)
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
 </body>
 </html>

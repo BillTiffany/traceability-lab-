@@ -18,6 +18,11 @@ app.get('/', (req,res) => {
     rollbar.info('html file served successfully.')
 })
 
+app.post('/api/fear', (req, res)=>{
+    let {name} = req.body
+    name = name.trim()})
+
+
 try {
     nonExistentFunction();
   } catch (error) {
