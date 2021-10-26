@@ -1,11 +1,20 @@
+body {
+    background-image: url('https://www.teahub.io/photos/full/13-135128_pennywise-wallpaper-red-balloon.jpg');
+    color: white;
+}
+
+
 
 aside {
 padding: 10px;
-background-color: lightcoral;
-color: darkslategray;
+background-color: #9a0525;
+color: black;
+font-size: 40px;
+font-weight: bold;
 border-radius: 10px;
 position: absolute;
 top: 10px;
 right: 10px;
 border: 1px solid black;
+max-width: 50%;
 } 
