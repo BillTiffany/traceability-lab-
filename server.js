@@ -27,14 +27,14 @@ app.post('/api/fear', (req, res)=>{
 
     if(index === -1 && name !== ''){
         fears.push(name)
-        rollbar.log('Student added successfully', {author: 'Bill', type: 'manual entry'})
+        rollbar.log(`User's fear has been added`, {author: 'Bill', type: 'manual entry'})
         res.status(200).send(fears)
     } else if (name === ''){
-        rollbar.error('No name given')
-        res.status(400).send('must provide a name.')
+        rollbar.error('No fear given')
+        res.status(400).send(`You must add a fear, don't worry we already know it.`)
     } else {
-        rollbar.warning('student already exists')
-        res.status(400).send('Warning: that student already exists')
+        rollbar.warning(`Fear already exists in database`)
+        res.status(400).send('Warning. that fear already exists in our database.')
     }
 
 })
