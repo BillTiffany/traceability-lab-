@@ -22,7 +22,9 @@ try {
     nonExistentFunction();
   } catch (error) {
     console.error(error);
-    rollbar.warning('non-existent function')
+    rollbar.warning('Example of a warning alert')
+    rollbar.critical('RED ALERT: CRITICAL ALERT!');
+
     // expected output: ReferenceError: nonExistentFunction is not defined
     // Note - error messages will vary depending on browser
   }
