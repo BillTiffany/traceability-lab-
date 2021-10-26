@@ -5,29 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuesday Lab!</title>
+    <link rel="stylesheet" href="/style">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 <body>
     <h1>Tuesdays lab</h1>
+    <h1>What is your BIGGEST Fear??</h1>
     <form>
-    <button class ="scary">Add Your Fear</button>
-    <input type="text" placeholder="Enter your biggest fear"></input>
+        <input type="text" placeholder="Enter your biggest fear"></input>
+        <button>Add Your Fear</button>
     </form>
     <section></section>
     <script>
-function submitHandler(e){
+        const addForm = document.querySelector('form')
+        const fearInput = document.querySelector('input')
+        const container = document.querySelector('section')
+        
+        
+        function submitHandler(e){
             e.preventDefault()
-            axios.post('/api/fear', {name: fear.value, })
+            axios.post('/api/fear', {name: fearInput.value, })
                 .then(res => {
                     container.innerHTML = ''
-                    fear.value = ''
+                    fearInput.value = ''
 
                     res.data.forEach(Fear => {
                         container.innerHTML += `<p>${Fear}</p>`
                     })
                 })
                 .catch(err => {
-                    fear.value = ''
+                    fearInput.value = ''
 
                     const notif = document.createElement('aside')
                     notif.innerHTML = `<p>${err.response.data}</p>
@@ -43,18 +50,6 @@ function submitHandler(e){
         }
 
         addForm.addEventListener('submit', submitHandler)
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 </body>
 </html>

@@ -17,11 +17,27 @@ app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
     rollbar.info('html file served successfully.')
 })
+let fears = []
 
 app.post('/api/fear', (req, res)=>{
     let {name} = req.body
-    name = name.trim()})
+    name = name.trim()
+    
+    const index = fears.findIndex(Fear=> Fear === name)
 
+    if(index === -1 && name !== ''){
+        fears.push(name)
+        rollbar.log('Student added successfully', {author: 'Bill', type: 'manual entry'})
+        res.status(200).send(fears)
+    } else if (name === ''){
+        rollbar.error('No name given')
+        res.status(400).send('must provide a name.')
+    } else {
+        rollbar.warning('student already exists')
+        res.status(400).send('Warning: that student already exists')
+    }
+
+})
 
 try {
     nonExistentFunction();
@@ -35,4 +51,6 @@ try {
   }
 
 const port = process.env.PORT || 4242
+
+app.use(rollbar.errorHandler())
 app.listen(port, () => console.log(`Take us to warp ${port}!`))
