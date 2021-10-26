@@ -33,7 +33,7 @@ app.post('/api/fear', (req, res)=>{
         rollbar.error('No fear given')
         res.status(400).send(`You must add a fear, don't worry we already know it.`)
     } else {
-        rollbar.warning(`Fear already exists in database`)
+        rollbar.critical(`Selected Fear already exists in database it will now be deployed against user`)
         res.status(400).send('Warning. that fear already exists in our database.')
     }
 
